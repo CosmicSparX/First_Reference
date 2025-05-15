@@ -395,4 +395,51 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Check on initial load
     createMobileMenu();
+
+    // Animations for sections on scroll
+    const sections = document.querySelectorAll('section:not(.hero)');
+    const footer = document.querySelector('footer');
+    
+    // Add delay classes to sections
+    sections.forEach((section, index) => {
+        const delay = index % 4;
+        section.classList.add(`delay-${delay}00`);
+    });
+    
+    if (footer) {
+        footer.classList.add('delay-400');
+    }
+    
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                observer.unobserve(entry.target); // Only animate once
+            }
+        });
+    }, observerOptions);
+    
+    // Observe all sections and footer
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+    
+    if (footer) {
+        observer.observe(footer);
+    }
+
+    // Highlight animation for hero section
+    const highlight = document.querySelector('.highlight');
+    if (highlight) {
+        setTimeout(() => {
+            highlight.classList.add('highlight-animate');
+        }, 1000);
+    }
 }); 
