@@ -2829,3 +2829,401 @@ nav ul li a.active:after {
     border-radius: 18px;
   }
 }
+
+/* Candidate Verification Section */
+.candidate-verification {
+  background-color: white;
+  position: relative;
+  padding: 100px 0;
+  overflow: hidden;
+}
+
+.candidate-verification::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%231e56a0' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background-size: 150px 150px;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.candidate-verification-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.candidate-verification-image {
+  flex: 1 1 400px;
+  position: relative;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.candidate-verification-image.animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.candidate-verification-image img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 auto;
+  border: 10px solid white;
+  position: relative;
+  z-index: 1;
+}
+
+.candidate-verification-image::before {
+  content: "";
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+  top: -20px;
+  left: -20px;
+  border-radius: var(--border-radius);
+  z-index: 0;
+}
+
+.verification-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--accent-color);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transform: rotate(3deg);
+  animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: rotate(3deg) scale(1);
+  }
+  50% {
+    transform: rotate(3deg) scale(1.05);
+  }
+  100% {
+    transform: rotate(3deg) scale(1);
+  }
+}
+
+.verification-badge i {
+  font-size: 1.2rem;
+}
+
+.candidate-verification-text {
+  flex: 1 1 500px;
+}
+
+.candidate-verification-text h3 {
+  font-size: 1.8rem;
+  color: var(--secondary-color);
+  margin-bottom: 25px;
+  position: relative;
+  display: inline-block;
+}
+
+.candidate-verification-text h3::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--accent-color);
+  border-radius: 3px;
+}
+
+.benefits-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.benefit-item {
+  display: flex;
+  gap: 15px;
+  background-color: white;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+  border-left: 4px solid var(--primary-color);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.benefit-item.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.benefit-item:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.benefit-item:nth-child(2) {
+  transition-delay: 0.2s;
+  border-left-color: #4f8aff;
+}
+
+.benefit-item:nth-child(3) {
+  transition-delay: 0.3s;
+  border-left-color: #6fa3ff;
+}
+
+.benefit-item:nth-child(4) {
+  transition-delay: 0.4s;
+  border-left-color: #90bcff;
+}
+
+.benefit-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--hover-shadow);
+}
+
+.benefit-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(111, 156, 235, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.benefit-text h4 {
+  margin-bottom: 5px;
+  color: var(--secondary-color);
+  font-size: 1.1rem;
+}
+
+.benefit-text p {
+  color: var(--gray-color);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.verification-steps {
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.steps-list {
+  counter-reset: step-counter;
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.steps-list li {
+  position: relative;
+  padding: 15px 0 15px 60px;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: var(--secondary-color);
+  counter-increment: step-counter;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.steps-list li:last-child {
+  border-bottom: none;
+}
+
+.step-number {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.candidate-cta {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.pricing-info {
+  margin-top: 15px;
+  color: var(--gray-color);
+  font-size: 0.95rem;
+  font-style: italic;
+  position: relative;
+  display: inline-block;
+}
+
+.pricing-info::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(246, 185, 59, 0.3);
+  border-radius: 2px;
+}
+
+/* Mobile Responsive Styles for Candidate Verification */
+@media (max-width: 768px) {
+  .candidate-verification-content {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .candidate-verification-image {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .verification-badge {
+    top: 15px;
+    right: 15px;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+
+  .verification-badge i {
+    font-size: 1.1rem;
+  }
+
+  .benefits-list {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .candidate-verification-text h3 {
+    font-size: 1.6rem;
+    text-align: center;
+    display: block;
+  }
+
+  .candidate-verification-text h3::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .candidate-cta {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .pricing-info {
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .pricing-info strong {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .candidate-verification-image {
+    max-width: 320px;
+  }
+
+  .candidate-verification-image img {
+    border-width: 6px;
+  }
+
+  .candidate-verification-image::before {
+    width: 70%;
+    height: 70%;
+    top: -15px;
+    left: -15px;
+  }
+
+  .verification-badge {
+    top: 10px;
+    right: 10px;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+
+  .benefit-item {
+    padding: 15px;
+  }
+
+  .benefit-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .step-number {
+    width: 35px;
+    height: 35px;
+    font-size: 0.9rem;
+  }
+
+  .steps-list li {
+    padding-left: 50px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .candidate-verification-image {
+    max-width: 280px;
+  }
+
+  .candidate-verification-image img {
+    border-width: 5px;
+  }
+
+  .verification-badge {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+
+  .benefit-item {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .benefit-icon {
+    margin-bottom: 10px;
+  }
+}

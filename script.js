@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Add animations on scroll
     const animateOnScroll = function() {
-        const elements = document.querySelectorAll('.card, .step, .bgv-image, .bgv-text, .bgv-text ul li, .stat-item, .hero-feature, .hero-testimonial');
+        const elements = document.querySelectorAll('.card, .step, .bgv-image, .bgv-text, .bgv-text ul li, .stat-item, .hero-feature, .hero-testimonial, .benefit-item, .candidate-verification-image');
         
         elements.forEach(element => {
             const elementPosition = element.getBoundingClientRect().top;
