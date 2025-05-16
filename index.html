@@ -285,7 +285,14 @@
             <h2>Interested? Get in Touch</h2>
             <p>Fill the form below and we'll send you a simple Google Form to collect your specific requirements. Get verified candidates within 1 hour of submitting your requirements!</p>
             <div class="contact-form">
-                <form id="interestForm">
+                <form id="interestForm" action="https://formsubmit.co/getintouch@firstreference.in" method="POST">
+                    <!-- FormSubmit configuration -->
+                    <input type="hidden" name="_subject" value="New Interest Form Submission - First Reference">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="https://firstreference.in/thank-you.html">
+                    <input type="hidden" name="_cc" value="getintouch@firstreference.in">
+
                     <div class="form-group">
                         <label for="name">Your Name</label>
                         <input type="text" id="name" name="name" placeholder="Enter your full name" required>
@@ -321,45 +328,15 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">
-                    <div class="footer-logo-img">
-                        <img src="assets/fr.svg" alt="First Reference Logo" class="footer-logo-svg">
-                    </div>
+                <div class="footer-logo-img">
+                    <img src="assets/fr.svg" alt="First Reference Logo" class="footer-logo-svg">
                     <h3>First Reference</h3>
-                    <p>Providing verified candidates and background verification services with blockchain technology and AI.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
                 </div>
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#candidates">Verified Candidates</a></li>
-                        <li><a href="#bgv">Background Verification</a></li>
-                        <li><a href="#verification-process">Our Process</a></li>
-                        <li><a href="#contact">Contact Us</a></li>
-                    </ul>
+                <div class="footer-email">
+                    <a href="mailto:getintouch@firstreference.in"><i class="fas fa-envelope"></i> getintouch@firstreference.in</a>
                 </div>
-                <div class="footer-contact">
-                    <h4>Contact Us</h4>
-                    <ul>
-                        <li><i class="fas fa-envelope"></i> <div>info@firstreference.in</div></li>
-                        <li><i class="fas fa-phone"></i> <div>+91 1234567890</div></li>
-                        <li><i class="fas fa-map-marker-alt"></i> <div>123 Business Park, <br>Mumbai, Maharashtra, India</div></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 First Reference. All rights reserved.</p>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                <div class="footer-copyright">
+                    &copy; 2023 First Reference. All rights reserved.
                 </div>
             </div>
         </div>

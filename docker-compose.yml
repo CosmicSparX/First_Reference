@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    volumes:
+      # Mount these as volumes to enable live editing without rebuilding
+      - ./index.html:/usr/share/nginx/html/index.html
+      - ./styles.css:/usr/share/nginx/html/styles.css
+      - ./script.js:/usr/share/nginx/html/script.js
+      - ./thank-you.html:/usr/share/nginx/html/thank-you.html
+      - ./assets:/usr/share/nginx/html/assets 

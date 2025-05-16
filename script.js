@@ -67,44 +67,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the active link
     setActiveNavLink();
     
-    // Form handling
-    const interestForm = document.getElementById('interestForm');
-    
-    if (interestForm) {
-        interestForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const formDataObj = {};
-            
-            formData.forEach((value, key) => {
-                formDataObj[key] = value;
-            });
-            
-            // Display submission message
-            const formContainer = document.querySelector('.contact-form');
-            
-            // Success message HTML
-            const successMessage = `
-                <div class="success-message">
-                    <div class="success-icon">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <h3>Thank you for your interest!</h3>
-                    <p>We've received your request and will send you a detailed Google Form shortly to collect your specific requirements.</p>
-                    <p>Please check your email at <strong>${formDataObj.email}</strong></p>
-                    <p>Our team will contact you within <strong>1 hour</strong>!</p>
-                </div>
-            `;
-            
-            // Replace form with success message
-            formContainer.innerHTML = successMessage;
-            
-            // In a real application, you would send the data to a server here
-            console.log('Form submitted with data:', formDataObj);
-        });
-    }
+    // Form handling - Using FormSubmit API
+    // No custom JS needed since we're using the FormSubmit service
     
     // Animation for hero image
     const heroImage = document.querySelector('.hero-image');
@@ -406,9 +370,7 @@ document.addEventListener('DOMContentLoaded', function() {
         section.classList.add(`delay-${delay}00`);
     });
     
-    if (footer) {
-        footer.classList.add('delay-400');
-    }
+    // Removed footer animation delay
     
     // Intersection Observer for scroll animations
     const observerOptions = {
@@ -426,14 +388,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
     
-    // Observe all sections and footer
+    // Observe only sections, not footer
     sections.forEach(section => {
         observer.observe(section);
     });
     
-    if (footer) {
-        observer.observe(footer);
-    }
+    // Removed footer animation
 
     // Highlight animation for hero section
     const highlight = document.querySelector('.highlight');
