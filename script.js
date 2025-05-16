@@ -10,6 +10,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Create mobile menu
+    createMobileMenu();
+    
+    // Add mobile styles
+    addMobileStyles();
+
     // Smooth scrolling for navigation links
     const navLinks = document.querySelectorAll('nav a, .footer-links a, .cta-buttons a');
     
@@ -23,8 +29,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 const targetSection = document.querySelector(targetId);
                 
                 if (targetSection) {
+                    let offset = 80; // Default offset for desktop
+                    
+                    // Adjust offset for mobile devices
+                    if (window.innerWidth <= 768) {
+                        offset = 60;
+                    }
+                    
                     window.scrollTo({
-                        top: targetSection.offsetTop - 80, // Offset for fixed header
+                        top: targetSection.offsetTop - offset,
                         behavior: 'smooth'
                     });
                 }
@@ -67,9 +80,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize the active link
     setActiveNavLink();
     
-    // Form handling - Using FormSubmit API
-    // No custom JS needed since we're using the FormSubmit service
-    
     // Animation for hero image
     const heroImage = document.querySelector('.hero-image');
     if (heroImage) {
@@ -82,76 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             heroHighlight.classList.add('highlight-animate');
         }, 500);
-    }
-    
-    // Counter animation for hero stats
-    function animateCounters() {
-        const stats = document.querySelectorAll('.stat-number');
-        
-        stats.forEach(stat => {
-            const content = stat.textContent;
-            if (content.includes('+')) {
-                const numStr = content.replace(/[^0-9]/g, '');
-                const num = parseInt(numStr);
-                
-                if (!isNaN(num)) {
-                    // Start from 0
-                    let startNum = 0;
-                    const duration = 1500; // 1.5 seconds
-                    const interval = 20; // Update every 20ms
-                    const increment = num / (duration / interval);
-                    
-                    const icon = stat.querySelector('i');
-                    stat.textContent = '0';
-                    if (icon) {
-                        stat.prepend(icon);
-                    }
-                    
-                    const timer = setInterval(() => {
-                        startNum += increment;
-                        const displayNum = Math.min(Math.round(startNum), num);
-                        stat.textContent = displayNum + (content.includes('+') ? '+' : '');
-                        if (icon) {
-                            stat.prepend(icon);
-                        }
-                        
-                        if (displayNum >= num) {
-                            clearInterval(timer);
-                        }
-                    }, interval);
-                }
-            } else if (!content.includes('i')) {
-                // For decimal numbers like 4.8
-                const num = parseFloat(content);
-                
-                if (!isNaN(num)) {
-                    // Start from 0
-                    let startNum = 0;
-                    const duration = 1500; // 1.5 seconds
-                    const interval = 20; // Update every 20ms
-                    const increment = num / (duration / interval);
-                    
-                    const icon = stat.querySelector('i');
-                    stat.textContent = '0';
-                    if (icon) {
-                        stat.prepend(icon);
-                    }
-                    
-                    const timer = setInterval(() => {
-                        startNum += increment;
-                        const displayNum = Math.min(parseFloat(startNum.toFixed(1)), num);
-                        stat.textContent = displayNum;
-                        if (icon) {
-                            stat.prepend(icon);
-                        }
-                        
-                        if (displayNum >= num) {
-                            clearInterval(timer);
-                        }
-                    }, interval);
-                }
-            }
-        });
     }
     
     // Add animations on scroll
@@ -174,57 +114,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
     
-    // Add animation styles
-    const animationStyle = document.createElement('style');
-    animationStyle.textContent = `
-        .card, .step, .bgv-image, .bgv-text, .bgv-text ul li, .stat-item, .hero-feature, .hero-testimonial {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        
-        .card.animate, .step.animate, .bgv-image.animate, .bgv-text.animate, .bgv-text ul li.animate, .stat-item.animate, .hero-feature.animate, .hero-testimonial.animate {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .hero-feature:nth-child(1) {
-            transition-delay: 0.1s;
-        }
-        
-        .hero-feature:nth-child(2), .card:nth-child(2), .step:nth-child(2), .stat-item:nth-child(2), .bgv-text ul li:nth-child(2) {
-            transition-delay: 0.2s;
-        }
-        
-        .hero-feature:nth-child(3), .card:nth-child(3), .step:nth-child(3), .stat-item:nth-child(3), .bgv-text ul li:nth-child(3) {
-            transition-delay: 0.3s;
-        }
-        
-        .hero-feature:nth-child(4), .step:nth-child(4), .bgv-text ul li:nth-child(4) {
-            transition-delay: 0.4s;
-        }
-        
-        .step:nth-child(5) {
-            transition-delay: 0.5s;
-        }
-        
-        .hero-image {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        
-        .hero-image.animate-on-load {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .highlight-animate::after {
-            animation: highlightGrow 0.8s ease forwards;
-        }
-    `;
-    document.head.appendChild(animationStyle);
-    
     // Run animations on load and scroll
     window.addEventListener('scroll', animateOnScroll);
     window.addEventListener('load', function() {
@@ -238,139 +127,108 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Mobile menu toggle functionality
-    function createMobileMenu() {
-        // Check if we need to create a mobile menu based on window width
-        if (window.innerWidth <= 768) {
-            const header = document.querySelector('header .container');
-            const nav = document.querySelector('nav');
+    // Counter animation for hero stats
+    function animateCounters() {
+        const stats = document.querySelectorAll('.stat-number');
+        
+        stats.forEach(stat => {
+            const content = stat.textContent;
             
-            // Only create if it doesn't exist yet
-            if (!document.querySelector('.mobile-toggle')) {
-                // Create the toggle button
-                const mobileToggle = document.createElement('div');
-                mobileToggle.className = 'mobile-toggle';
-                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
-                
-                // Add it to the header before the nav
-                header.insertBefore(mobileToggle, nav);
-                
-                // Add toggle functionality
-                mobileToggle.addEventListener('click', function() {
-                    nav.classList.toggle('mobile-active');
-                    
-                    // Change icon based on menu state
-                    if (nav.classList.contains('mobile-active')) {
-                        mobileToggle.innerHTML = '<i class="fas fa-times"></i>';
-                    } else {
-                        mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
-                    }
-                });
-                
-                // Add mobile menu styles
-                const mobileStyle = document.createElement('style');
-                mobileStyle.textContent = `
-                    .mobile-toggle {
-                        display: none;
-                        font-size: 1.5rem;
-                        cursor: pointer;
-                        color: var(--primary-color);
-                        width: 40px;
-                        height: 40px;
-                        border-radius: 50%;
-                        background: rgba(30, 86, 160, 0.1);
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        transition: all 0.3s ease;
-                    }
-                    
-                    .mobile-toggle:hover {
-                        background: rgba(30, 86, 160, 0.2);
-                    }
-                    
-                    @media (max-width: 768px) {
-                        .mobile-toggle {
-                            display: flex;
-                            position: absolute;
-                            top: 20px;
-                            right: 20px;
-                        }
-                        
-                        nav {
-                            display: none;
-                            width: 100%;
-                            background: white;
-                            padding: 15px;
-                            border-radius: 10px;
-                            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-                            margin-top: 10px;
-                        }
-                        
-                        nav.mobile-active {
-                            display: block;
-                            animation: slideDown 0.3s ease forwards;
-                        }
-                        
-                        nav ul {
-                            flex-direction: column;
-                            width: 100%;
-                        }
-                        
-                        nav ul li {
-                            margin: 0;
-                            text-align: center;
-                            padding: 12px 0;
-                            border-bottom: 1px solid var(--border-color);
-                        }
-                        
-                        nav ul li:last-child {
-                            border-bottom: none;
-                        }
-                        
-                        @keyframes slideDown {
-                            from {
-                                opacity: 0;
-                                transform: translateY(-20px);
-                            }
-                            to {
-                                opacity: 1;
-                                transform: translateY(0);
-                            }
-                        }
-                    }
-                `;
-                document.head.appendChild(mobileStyle);
-                
-                // Close menu when clicking a link
-                const mobileNavLinks = nav.querySelectorAll('a');
-                mobileNavLinks.forEach(link => {
-                    link.addEventListener('click', function() {
-                        nav.classList.remove('mobile-active');
-                        mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
-                    });
-                });
+            // Extract the numeric part from the content
+            let numStr = '';
+            let suffix = '';
+            
+            if (content.includes('+')) {
+                numStr = content.replace(/[^0-9]/g, '');
+                suffix = '+';
+            } else if (content.includes('hr') || content.includes('min')) {
+                // Handle "1 hr" format
+                const timeMatch = content.match(/(\d+(?:\.\d+)?)\s*(hr|min)/);
+                if (timeMatch) {
+                    numStr = timeMatch[1];
+                    suffix = ' ' + timeMatch[2];
+                }
+            } else if (!content.includes('i')) {
+                // For decimal numbers like 4.8
+                numStr = content.trim();
             }
-        }
+            
+            const num = parseFloat(numStr);
+            
+            if (!isNaN(num)) {
+                // Start from 0
+                let startNum = 0;
+                const duration = 1500; // 1.5 seconds
+                const interval = 20; // Update every 20ms
+                const increment = num / (duration / interval);
+                
+                const icon = stat.querySelector('i');
+                let iconHTML = '';
+                if (icon) {
+                    iconHTML = icon.outerHTML;
+                    icon.remove();
+                }
+                
+                stat.textContent = '0';
+                if (iconHTML) {
+                    stat.innerHTML = iconHTML + stat.textContent;
+                }
+                
+                const timer = setInterval(() => {
+                    startNum += increment;
+                    let displayNum;
+                    
+                    if (numStr.includes('.')) {
+                        // Handle decimal numbers
+                        displayNum = Math.min(parseFloat(startNum.toFixed(1)), num);
+                    } else {
+                        // Handle integers
+                        displayNum = Math.min(Math.round(startNum), num);
+                    }
+                    
+                    if (iconHTML) {
+                        stat.innerHTML = iconHTML + displayNum + suffix;
+                    } else {
+                        stat.textContent = displayNum + suffix;
+                    }
+                    
+                    if (displayNum >= num) {
+                        clearInterval(timer);
+                    }
+                }, interval);
+            }
+        });
     }
-    
-    // Check for resize events to add mobile menu if needed
-    window.addEventListener('resize', createMobileMenu);
-    
-    // Check on initial load
-    createMobileMenu();
 
+    // Initialize counter animation when stats come into view
+    function initCounterAnimation() {
+        const statItems = document.querySelectorAll('.stat-item');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                    entry.target.classList.add('counted');
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        statItems.forEach(item => {
+            observer.observe(item);
+        });
+    }
+
+    // Initialize counter animation
+    initCounterAnimation();
+    
     // Animations for sections on scroll
     const sections = document.querySelectorAll('section:not(.hero)');
-    const footer = document.querySelector('footer');
     
     // Add delay classes to sections
     sections.forEach((section, index) => {
         const delay = index % 4;
         section.classList.add(`delay-${delay}00`);
     });
-    
-    // Removed footer animation delay
     
     // Intersection Observer for scroll animations
     const observerOptions = {
@@ -393,8 +251,6 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(section);
     });
     
-    // Removed footer animation
-
     // Highlight animation for hero section
     const highlight = document.querySelector('.highlight');
     if (highlight) {
@@ -402,4 +258,181 @@ document.addEventListener('DOMContentLoaded', function() {
             highlight.classList.add('highlight-animate');
         }, 1000);
     }
-}); 
+    
+    // Handle window resize for mobile menu
+    window.addEventListener('resize', function() {
+        // If we're in mobile view, ensure the menu closes when resizing larger
+        if (window.innerWidth > 768) {
+            const nav = document.querySelector('nav');
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            
+            if (nav && nav.classList.contains('mobile-active')) {
+                nav.classList.remove('mobile-active');
+                if (mobileToggle) {
+                    mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            }
+        }
+    });
+
+    // Add mobile-specific animation for hero image
+    initMobileHeroImageAnimation();
+});
+
+// Mobile menu creation and functionality
+function createMobileMenu() {
+    // Check if we need to create a mobile menu based on window width
+    const header = document.querySelector('header .container');
+    const nav = document.querySelector('nav');
+    
+    // Only create if it doesn't exist yet
+    if (!document.querySelector('.mobile-toggle')) {
+        // Create the toggle button
+        const mobileToggle = document.createElement('div');
+        mobileToggle.className = 'mobile-toggle';
+        mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        
+        // Add it to the header before the nav
+        header.insertBefore(mobileToggle, nav);
+        
+        // Add toggle functionality
+        mobileToggle.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent event from bubbling up
+            nav.classList.toggle('mobile-active');
+            
+            // Change icon based on menu state
+            if (nav.classList.contains('mobile-active')) {
+                mobileToggle.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+        
+        // Close menu when clicking a link
+        const mobileNavLinks = nav.querySelectorAll('a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                nav.classList.remove('mobile-active');
+                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!nav.contains(event.target) && !mobileToggle.contains(event.target) && nav.classList.contains('mobile-active')) {
+                nav.classList.remove('mobile-active');
+                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+    }
+}
+
+// Add mobile menu styles dynamically
+function addMobileStyles() {
+    // Check if styles already added
+    if (!document.getElementById('mobile-menu-styles')) {
+        const mobileStyle = document.createElement('style');
+        mobileStyle.id = 'mobile-menu-styles';
+        mobileStyle.textContent = `
+            @media (min-width: 769px) {
+                .mobile-toggle {
+                    display: none !important;
+                }
+                
+                nav {
+                    display: block !important;
+                    position: static !important;
+                    box-shadow: none !important;
+                    background: transparent !important;
+                    width: auto !important;
+                }
+                
+                nav ul {
+                    flex-direction: row !important;
+                    padding: 0 !important;
+                }
+                
+                nav ul li {
+                    border: none !important;
+                    padding: 0 !important;
+                    width: auto !important;
+                }
+            }
+            
+            .card, .step, .bgv-image, .bgv-text, .bgv-text ul li, .stat-item, .hero-feature, .hero-testimonial {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 0.6s ease, transform 0.6s ease;
+            }
+            
+            .card.animate, .step.animate, .bgv-image.animate, .bgv-text.animate, .bgv-text ul li.animate, .stat-item.animate, .hero-feature.animate, .hero-testimonial.animate {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            .hero-feature:nth-child(1) {
+                transition-delay: 0.1s;
+            }
+            
+            .hero-feature:nth-child(2), .card:nth-child(2), .step:nth-child(2), .stat-item:nth-child(2), .bgv-text ul li:nth-child(2) {
+                transition-delay: 0.2s;
+            }
+            
+            .hero-feature:nth-child(3), .card:nth-child(3), .step:nth-child(3), .stat-item:nth-child(3), .bgv-text ul li:nth-child(3) {
+                transition-delay: 0.3s;
+            }
+            
+            .hero-feature:nth-child(4), .step:nth-child(4), .bgv-text ul li:nth-child(4) {
+                transition-delay: 0.4s;
+            }
+            
+            .step:nth-child(5) {
+                transition-delay: 0.5s;
+            }
+            
+            .hero-image {
+                opacity: 0;
+                transform: translateX(50px);
+                transition: opacity 0.8s ease, transform 0.8s ease;
+            }
+            
+            .hero-image.animate-on-load {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            
+            .highlight-animate::after {
+                animation: highlightGrow 0.8s ease forwards;
+            }
+        `;
+        document.head.appendChild(mobileStyle);
+    }
+}
+
+// Add mobile-specific animation for hero image
+function initMobileHeroImageAnimation() {
+    const heroImage = document.querySelector('.hero-image');
+    if (!heroImage) return;
+    
+    // Check if on mobile
+    if (window.innerWidth <= 768) {
+        // Add a subtle animation effect for mobile
+        heroImage.style.opacity = '0';
+        heroImage.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            heroImage.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            heroImage.style.opacity = '1';
+            heroImage.style.transform = 'translateY(0)';
+        }, 300);
+        
+        // Add subtle hover effect on tap for mobile
+        heroImage.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(1.02)';
+        });
+        
+        heroImage.addEventListener('touchend', function() {
+            this.style.transform = 'scale(1)';
+        });
+    }
+} 
