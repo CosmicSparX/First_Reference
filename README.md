@@ -21,7 +21,7 @@ A simple website for First Reference, a service providing verified candidates an
 - Vanilla JavaScript
 - Font Awesome for icons
 
-- Email: info@firstreference.in
+- Email: getintouch@firstreference.in
 - Website: [firstreference.in](https://firstreference.in)
 
 ## License
