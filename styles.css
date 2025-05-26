@@ -6,17 +6,17 @@
 }
 
 :root {
-  --primary-color: #463f3a;
-  --secondary-color: #8a817c;
-  --accent-color: #e0afa0;
-  --light-color: #f4f3ee;
-  --dark-color: #463f3a;
-  --gray-color: #bcb8b1;
-  --border-color: #bcb8b1;
-  --success-color: #8a817c;
-  --card-bg: #f4f3ee;
-  --body-bg: #f4f3ee;
-  --section-bg-alt: #f4f3ee;
+  --primary-color: #034078; /* Indigo dye - main brand color */
+  --secondary-color: #001f54; /* Penn Blue - for secondary elements */
+  --accent-color: #1282a2; /* Cerulean - for accents and highlights */
+  --light-color: #f8f9fa;
+  --dark-color: #0a1128; /* Oxford Blue - for dark sections */
+  --gray-color: #6c757d;
+  --border-color: #e0e0e0;
+  --success-color: #28a745;
+  --card-bg: #ffffff;
+  --body-bg: #f5f7fa;
+  --section-bg-alt: #f0f4f8;
   --font-main: "Poppins", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -31,11 +31,8 @@ body {
   line-height: 1.6;
   color: var(--dark-color);
   background-color: var(--body-bg);
-  background-image: linear-gradient(
-      rgba(138, 129, 124, 0.03) 1px,
-      transparent 1px
-    ),
-    linear-gradient(90deg, rgba(138, 129, 124, 0.03) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(3, 64, 120, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(3, 64, 120, 0.03) 1px, transparent 1px);
   background-size: 20px 20px;
   background-attachment: fixed;
   overflow-x: hidden;
@@ -79,7 +76,7 @@ section {
 
 /* Make sure footer is not affected by section styles */
 footer {
-  background-color: #463f3a;
+  background-color: #0a1128; /* Oxford Blue */
   color: white;
   padding: 22px 0;
   position: relative;
@@ -937,13 +934,21 @@ nav ul li a.active:after {
 
 .hero-badge {
   display: inline-block;
-  background-color: rgba(246, 185, 59, 0.2);
-  color: var(--accent-color);
+  background-color: rgba(18, 130, 162, 0.15); /* Cerulean with opacity */
+  color: #034078; /* Indigo dye */
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 600;
   margin-bottom: 25px;
+  border: 1px solid rgba(18, 130, 162, 0.2); /* Subtle border using Cerulean */
+  box-shadow: 0 2px 4px rgba(3, 64, 120, 0.05); /* Subtle shadow using primary color */
+}
+
+.hero-badge:hover {
+  background-color: rgba(18, 130, 162, 0.2);
+  transform: translateY(-1px);
+  transition: all 0.3s ease;
 }
 
 .hero h1 {
