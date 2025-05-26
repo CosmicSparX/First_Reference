@@ -50,6 +50,18 @@
                 font-size: 1rem;
                 margin-bottom: 25px;
             }
+            .footer-contact {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                width: 100%;
+                text-align: center;
+                margin: 10px 0;
+            }
+            .footer-email, .footer-phone {
+                width: 100%;
+                text-align: center;
+            }
         }
         
         @media (max-width: 576px) {
@@ -67,6 +79,25 @@
                 font-size: 0.95rem;
                 margin-bottom: 20px;
             }
+        }
+        
+        .footer-links {
+            width: 100%;
+            text-align: center;
+            margin-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
         }
     </style>
 </head>
@@ -107,11 +138,21 @@
                     <img src="assets/fr.svg" alt="First Reference Logo" class="footer-logo-svg">
                     <h3>First Reference</h3>
                 </div>
-                <div class="footer-email">
-                    <a href="mailto:getintouch@firstreference.in"><i class="fas fa-envelope"></i> getintouch@firstreference.in</a>
+                <div class="footer-contact">
+                    <div class="footer-email">
+                        <a href="mailto:getintouch@firstreference.in"><i class="fas fa-envelope"></i> getintouch@firstreference.in</a>
+                    </div>
+                    <div class="footer-phone">
+                        <a href="tel:+917204827330"><i class="fas fa-phone-alt"></i> +91 72048 27330</a>
+                    </div>
                 </div>
                 <div class="footer-copyright">
                     &copy; 2023 First Reference. All rights reserved.
+                </div>
+                <div class="footer-links">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms-conditions.html">Terms & Conditions</a>
+                    <a href="cancellation-policy.html">Cancellation Policy</a>
                 </div>
             </div>
         </div>

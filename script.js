@@ -137,6 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Extract the numeric part from the content
             let numStr = '';
             let suffix = '';
+            let isMobile = window.innerWidth <= 768;
             
             if (content.includes('+')) {
                 numStr = content.replace(/[^0-9]/g, '');
@@ -158,9 +159,11 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!isNaN(num)) {
                 // Start from 0
                 let startNum = 0;
-                const duration = 1500; // 1.5 seconds
-                const interval = 20; // Update every 20ms
-                const increment = num / (duration / interval);
+                // Adjust duration and interval based on number size and device
+                const duration = isMobile ? (num > 1000 ? 1000 : 1500) : 1500; // Shorter duration for large numbers on mobile
+                const interval = isMobile ? (num > 1000 ? 10 : 20) : 20; // More frequent updates for large numbers on mobile
+                const steps = duration / interval;
+                const increment = num / steps;
                 
                 const icon = stat.querySelector('i');
                 let iconHTML = '';
@@ -174,26 +177,43 @@ document.addEventListener('DOMContentLoaded', function() {
                     stat.innerHTML = iconHTML + stat.textContent;
                 }
                 
+                let currentNum = 0;
                 const timer = setInterval(() => {
-                    startNum += increment;
+                    currentNum += increment;
                     let displayNum;
                     
                     if (numStr.includes('.')) {
                         // Handle decimal numbers
-                        displayNum = Math.min(parseFloat(startNum.toFixed(1)), num);
+                        displayNum = Math.min(parseFloat(currentNum.toFixed(1)), num);
                     } else {
                         // Handle integers
-                        displayNum = Math.min(Math.round(startNum), num);
+                        displayNum = Math.min(Math.round(currentNum), num);
+                    }
+                    
+                    // Format large numbers with commas for better readability
+                    let formattedNum = displayNum;
+                    if (displayNum >= 1000) {
+                        formattedNum = displayNum.toLocaleString();
                     }
                     
                     if (iconHTML) {
-                        stat.innerHTML = iconHTML + displayNum + suffix;
+                        stat.innerHTML = iconHTML + formattedNum + suffix;
                     } else {
-                        stat.textContent = displayNum + suffix;
+                        stat.textContent = formattedNum + suffix;
                     }
                     
-                    if (displayNum >= num) {
+                    if (currentNum >= num) {
                         clearInterval(timer);
+                        // Ensure final number is exactly the target number
+                        let finalNum = num;
+                        if (finalNum >= 1000) {
+                            finalNum = finalNum.toLocaleString();
+                        }
+                        if (iconHTML) {
+                            stat.innerHTML = iconHTML + finalNum + suffix;
+                        } else {
+                            stat.textContent = finalNum + suffix;
+                        }
                     }
                 }, interval);
             }
@@ -359,53 +379,53 @@ function addMobileStyles() {
                 }
             }
             
-            .card, .step, .bgv-image, .bgv-text, .bgv-text ul li, .stat-item, .hero-feature, .hero-testimonial {
-                opacity: 0;
-                transform: translateY(30px);
-                transition: opacity 0.6s ease, transform 0.6s ease;
-            }
-            
-            .card.animate, .step.animate, .bgv-image.animate, .bgv-text.animate, .bgv-text ul li.animate, .stat-item.animate, .hero-feature.animate, .hero-testimonial.animate {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            
-            .hero-feature:nth-child(1) {
-                transition-delay: 0.1s;
-            }
-            
-            .hero-feature:nth-child(2), .card:nth-child(2), .step:nth-child(2), .stat-item:nth-child(2), .bgv-text ul li:nth-child(2) {
-                transition-delay: 0.2s;
-            }
-            
-            .hero-feature:nth-child(3), .card:nth-child(3), .step:nth-child(3), .stat-item:nth-child(3), .bgv-text ul li:nth-child(3) {
-                transition-delay: 0.3s;
-            }
-            
-            .hero-feature:nth-child(4), .step:nth-child(4), .bgv-text ul li:nth-child(4) {
-                transition-delay: 0.4s;
-            }
-            
-            .step:nth-child(5) {
-                transition-delay: 0.5s;
-            }
-            
-            .hero-image {
-                opacity: 0;
-                transform: translateX(50px);
-                transition: opacity 0.8s ease, transform 0.8s ease;
-            }
-            
-            .hero-image.animate-on-load {
-                opacity: 1;
-                transform: translateX(0);
-            }
-            
-            .highlight-animate::after {
-                animation: highlightGrow 0.8s ease forwards;
-            }
-        `;
-        document.head.appendChild(mobileStyle);
+        .card, .step, .bgv-image, .bgv-text, .bgv-text ul li, .stat-item, .hero-feature, .hero-testimonial {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .card.animate, .step.animate, .bgv-image.animate, .bgv-text.animate, .bgv-text ul li.animate, .stat-item.animate, .hero-feature.animate, .hero-testimonial.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hero-feature:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+        
+        .hero-feature:nth-child(2), .card:nth-child(2), .step:nth-child(2), .stat-item:nth-child(2), .bgv-text ul li:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+        
+        .hero-feature:nth-child(3), .card:nth-child(3), .step:nth-child(3), .stat-item:nth-child(3), .bgv-text ul li:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+        
+        .hero-feature:nth-child(4), .step:nth-child(4), .bgv-text ul li:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+        
+        .step:nth-child(5) {
+            transition-delay: 0.5s;
+        }
+        
+        .hero-image {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .hero-image.animate-on-load {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .highlight-animate::after {
+            animation: highlightGrow 0.8s ease forwards;
+                    }
+                `;
+                document.head.appendChild(mobileStyle);
     }
 }
 
