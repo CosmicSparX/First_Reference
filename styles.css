@@ -6,9 +6,9 @@
 }
 
 :root {
-  --primary-color: #034078; /* Indigo dye - main brand color */
-  --secondary-color: #001f54; /* Penn Blue - for secondary elements */
-  --accent-color: #1282a2; /* Cerulean - for accents and highlights */
+  --primary-color: #2e4154; /* Indigo dye - main brand color */
+  --secondary-color: #314558; /* Penn Blue - for secondary elements */
+  --accent-color: #e67e22; /* Cerulean - for accents and highlights */
   --light-color: #f8f9fa;
   --dark-color: #0a1128; /* Oxford Blue - for dark sections */
   --gray-color: #6c757d;
@@ -76,7 +76,7 @@ section {
 
 /* Make sure footer is not affected by section styles */
 footer {
-  background-color: #0a1128; /* Oxford Blue */
+  background-color: #1a2530; /* Oxford Blue */
   color: white;
   padding: 22px 0;
   position: relative;
@@ -112,7 +112,7 @@ footer::before {
 .footer-logo-svg {
   width: 40px;
   height: 40px;
-  filter: brightness(1.5);
+  filter: brightness(0) invert(1);
   margin-right: 12px;
 }
 
@@ -934,8 +934,8 @@ nav ul li a.active:after {
 
 .hero-badge {
   display: inline-block;
-  background-color: rgba(18, 130, 162, 0.15); /* Cerulean with opacity */
-  color: #034078; /* Indigo dye */
+  background-color: #2e415424; /* Cerulean with opacity */
+  color: #2e4154; /* Indigo dye */
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 0.9rem;
@@ -946,7 +946,7 @@ nav ul li a.active:after {
 }
 
 .hero-badge:hover {
-  background-color: rgba(18, 130, 162, 0.2);
+  background-color: #2e415442;
   transform: translateY(-1px);
   transition: all 0.3s ease;
 }
