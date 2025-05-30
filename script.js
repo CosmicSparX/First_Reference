@@ -455,4 +455,215 @@ function initMobileHeroImageAnimation() {
             this.style.transform = 'scale(1)';
         });
     }
-} 
+}
+
+// User Authentication
+const loginForm = document.getElementById('loginForm');
+const registerForm = document.getElementById('registerForm');
+
+if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                window.location.href = '/';
+            } else {
+                alert(data.message || 'Login failed');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            alert('Login failed. Please try again.');
+        }
+    });
+}
+
+if (registerForm) {
+    registerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const fullName = document.getElementById('fullName').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (password !== confirmPassword) {
+            alert('Passwords do not match');
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    fullName,
+                    email,
+                    phone,
+                    password
+                })
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                alert('Registration successful! Please login.');
+                window.location.href = '/login.html';
+            } else {
+                alert(data.message || 'Registration failed');
+            }
+        } catch (error) {
+            console.error('Registration error:', error);
+            alert('Registration failed. Please try again.');
+        }
+    });
+}
+
+// Cart Management
+function addToCart(service) {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    cart.push(service);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartUI();
+}
+
+function removeFromCart(serviceId) {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const updatedCart = cart.filter(item => item.id !== serviceId);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    updateCartUI();
+}
+
+function updateCartUI() {
+    const cartItems = document.getElementById('cartItems');
+    const orderSummary = document.getElementById('orderSummary');
+    if (!cartItems || !orderSummary) return;
+
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    cartItems.innerHTML = '';
+    
+    let subtotal = 0;
+    cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
+        
+        cartItems.innerHTML += `
+            <div class="cart-item">
+                <h3>${item.name}</h3>
+                <p>₹${item.price} x ${item.quantity}</p>
+                <p>Total: ₹${itemTotal}</p>
+                <button onclick="removeFromCart('${item.id}')">Remove</button>
+            </div>
+        `;
+    });
+
+    const tax = subtotal * 0.18; // 18% GST
+    const total = subtotal + tax;
+
+    orderSummary.innerHTML = `
+        <h3>Order Summary</h3>
+        <p>Subtotal: ₹${subtotal}</p>
+        <p>Tax (18% GST): ₹${tax}</p>
+        <p>Total: ₹${total}</p>
+    `;
+}
+
+// Checkout Process
+const checkoutForm = document.getElementById('checkoutForm');
+if (checkoutForm) {
+    checkoutForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('Please login to complete checkout');
+            window.location.href = '/login.html';
+            return;
+        }
+
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        if (cart.length === 0) {
+            alert('Your cart is empty');
+            return;
+        }
+
+        const formData = new FormData(checkoutForm);
+        const billingInfo = {
+            fullName: formData.get('fullName'),
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+            company: formData.get('company'),
+            address: formData.get('address'),
+            gstin: formData.get('gstin')
+        };
+
+        const orderData = {
+            billingInfo,
+            items: cart,
+            paymentMethod: formData.get('paymentMethod'),
+            total: calculateTotal(cart)
+        };
+
+        try {
+            const response = await fetch('/api/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(orderData)
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                localStorage.removeItem('cart');
+                window.location.href = '/thank-you.html';
+            } else {
+                alert(data.message || 'Checkout failed');
+            }
+        } catch (error) {
+            console.error('Checkout error:', error);
+            alert('Checkout failed. Please try again.');
+        }
+    });
+}
+
+function calculateTotal(cart) {
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const tax = subtotal * 0.18; // 18% GST
+    return subtotal + tax;
+}
+
+// Initialize cart UI on page load
+document.addEventListener('DOMContentLoaded', () => {
+    updateCartUI();
+    
+    // Add event listeners to "Add to Cart" buttons
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const serviceCard = e.target.closest('.card');
+            const service = {
+                id: serviceCard.dataset.serviceId,
+                name: serviceCard.querySelector('h3').textContent,
+                price: parseFloat(serviceCard.querySelector('.price').textContent.replace('₹', '')),
+                quantity: 1
+            };
+            addToCart(service);
+        });
+    });
+}); 

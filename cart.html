@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - First Reference</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/logo.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/fr.svg" alt="FR Logo" class="logo-svg">
+                <h1>First Reference</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#candidates">Verified Candidates</a></li>
+                    <li><a href="index.html#candidate-verification">Get Verified</a></li>
+                    <li><a href="index.html#bgv">Background Verification</a></li>
+                    <li><a href="index.html#contact" class="nav-btn">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="cart-section">
+        <div class="container">
+            <div class="cart-container">
+                <h2>Your Cart</h2>
+                <div id="cartItems">
+                    <!-- Cart items will be dynamically added here -->
+                </div>
+                
+                <div class="cart-summary">
+                    <h3>Order Summary</h3>
+                    <div class="cart-summary-item">
+                        <span>Subtotal</span>
+                        <span id="subtotal">₹0</span>
+                    </div>
+                    <div class="cart-summary-item">
+                        <span>Tax (18% GST)</span>
+                        <span id="tax">₹0</span>
+                    </div>
+                    <div class="cart-summary-item cart-total">
+                        <span>Total</span>
+                        <span id="total">₹0</span>
+                    </div>
+                    <button id="checkoutBtn" class="btn primary" style="width: 100%; margin-top: 20px;">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html> 
