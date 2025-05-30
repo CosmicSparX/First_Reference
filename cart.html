@@ -23,6 +23,18 @@
                     <li><a href="index.html#candidate-verification">Get Verified</a></li>
                     <li><a href="index.html#bgv">Background Verification</a></li>
                     <li><a href="index.html#contact" class="nav-btn">Contact Us</a></li>
+                    <li class="nav-buttons">
+                        <a href="cart.html" class="cart-btn">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                        <a href="profile.html" class="profile-btn" style="display: none;">
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <a href="login.html" class="login-btn">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -56,6 +68,15 @@
         </div>
     </section>
 
-    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        document.getElementById('checkoutBtn').addEventListener('click', function() {
+            if (!isAuthenticated()) {
+                window.location.href = 'login.html';
+            } else {
+                window.location.href = 'checkout.html';
+            }
+        });
+    </script>
 </body>
 </html> 

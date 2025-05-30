@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - First Reference</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/logo.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/fr.svg" alt="FR Logo" class="logo-svg">
+                <h1>First Reference</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#candidates">Verified Candidates</a></li>
+                    <li><a href="index.html#candidate-verification">Get Verified</a></li>
+                    <li><a href="index.html#bgv">Background Verification</a></li>
+                    <li><a href="index.html#contact" class="nav-btn">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="profile-section">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-sidebar">
+                    <div class="profile-info">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <h3 id="userName">Loading...</h3>
+                        <p id="userEmail">Loading...</p>
+                    </div>
+                    <nav class="profile-nav">
+                        <ul>
+                            <li><a href="#profile" class="active"><i class="fas fa-user"></i> Profile</a></li>
+                            <li><a href="#orders"><i class="fas fa-shopping-bag"></i> Orders</a></li>
+                            <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                
+                <div class="profile-content">
+                    <div id="profile" class="profile-tab active">
+                        <h2>Profile Information</h2>
+                        <form id="profileForm" class="profile-form">
+                            <div class="form-group">
+                                <label for="fullName">Full Name</label>
+                                <input type="text" id="fullName" name="fullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            <button type="submit" class="btn primary">Update Profile</button>
+                        </form>
+                    </div>
+                    
+                    <div id="orders" class="profile-tab">
+                        <h2>Order History</h2>
+                        <div id="orderHistory">
+                            <!-- Orders will be dynamically added here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="auth.js"></script>
+    <script>
+        // Check if user is authenticated
+        if (!isAuthenticated()) {
+            window.location.href = 'login.html';
+        }
+
+        // Load user profile
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            document.getElementById('userName').textContent = user.fullName;
+            document.getElementById('userEmail').textContent = user.email;
+            document.getElementById('fullName').value = user.fullName;
+            document.getElementById('email').value = user.email;
+            document.getElementById('phone').value = user.phone;
+        }
+
+        // Load order history
+        async function loadOrderHistory() {
+            try {
+                const response = await fetch(`${API_URL}/orders`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+
+                const orders = await response.json();
+                
+                const orderHistoryContainer = document.getElementById('orderHistory');
+                if (orders.length === 0) {
+                    orderHistoryContainer.innerHTML = '<p class="no-orders">No orders found</p>';
+                    return;
+                }
+
+                orderHistoryContainer.innerHTML = orders.map(order => `
+                    <div class="order-card">
+                        <div class="order-header">
+                            <h3>Order #${order.id}</h3>
+                            <span class="order-date">${new Date(order.created_at).toLocaleDateString()}</span>
+                        </div>
+                        <div class="order-details">
+                            <div class="order-items">
+                                ${order.items.map(item => `
+                                    <div class="order-item">
+                                        <span>${item.service_name} x ${item.quantity}</span>
+                                        <span>₹${(item.price * item.quantity).toFixed(2)}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="order-summary">
+                                <div class="order-total">
+                                    <span>Total Amount:</span>
+                                    <span>₹${order.total_amount.toFixed(2)}</span>
+                                </div>
+                                <div class="order-status">
+                                    <span>Status:</span>
+                                    <span class="status-${order.status.toLowerCase()}">${order.status}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading orders:', error);
+                document.getElementById('orderHistory').innerHTML = '<p class="error">Failed to load orders</p>';
+            }
+        }
+
+        // Load orders when the orders tab is clicked
+        document.querySelector('a[href="#orders"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelectorAll('.profile-tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById('orders').classList.add('active');
+            document.querySelectorAll('.profile-nav a').forEach(link => link.classList.remove('active'));
+            this.classList.add('active');
+            loadOrderHistory();
+        });
+
+        // Handle profile form submission
+        document.getElementById('profileForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            // TODO: Implement profile update functionality
+            alert('Profile update functionality will be implemented soon');
+        });
+    </script>
+</body>
+</html> 

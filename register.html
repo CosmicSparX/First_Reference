@@ -31,41 +31,33 @@
     <section class="auth-section">
         <div class="container">
             <div class="auth-container">
-                <div class="auth-box">
-                    <h2>Create an Account</h2>
-                    <form id="registerForm" class="auth-form">
-                        <div class="form-group">
-                            <label for="fullName">Full Name</label>
-                            <input type="text" id="fullName" name="fullName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" id="password" name="password" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="confirmPassword">Confirm Password</label>
-                            <input type="password" id="confirmPassword" name="confirmPassword" required>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn primary">Register</button>
-                        </div>
-                        <div class="auth-links">
-                            <p>Already have an account? <a href="login.html">Login here</a></p>
-                        </div>
-                    </form>
-                </div>
+                <h2>Register</h2>
+                <form id="registerForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn primary" style="width: 100%;">Register</button>
+                </form>
+                <p class="auth-links">
+                    Already have an account? <a href="login.html">Login here</a>
+                </p>
             </div>
         </div>
     </section>
 
-    <script src="script.js"></script>
+    <script src="auth.js"></script>
 </body>
 </html> 
