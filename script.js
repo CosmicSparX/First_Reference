@@ -157,9 +157,23 @@ document.addEventListener('DOMContentLoaded', function() {
             const num = parseFloat(numStr);
             
             if (!isNaN(num)) {
-                // Adjust duration and interval based on number size and device
-                const duration = isMobile ? 2000 : 1500; // Increased duration for mobile to ensure completion
-                const interval = isMobile ? 15 : 20; // Adjusted interval for smoother animation on mobile
+                // For mobile devices, show the final number immediately
+                if (isMobile) {
+                    let finalNum = num;
+                    if (finalNum >= 1000) {
+                        finalNum = finalNum.toLocaleString();
+                    }
+                    if (iconHTML) {
+                        stat.innerHTML = iconHTML + finalNum + suffix;
+                    } else {
+                        stat.textContent = finalNum + suffix;
+                    }
+                    return;
+                }
+
+                // Desktop animation
+                const duration = 500;
+                const interval = 10;
                 const steps = duration / interval;
                 const increment = num / steps;
                 
