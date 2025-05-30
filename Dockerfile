@@ -42,7 +42,7 @@ RUN mkdir -p /app/instance && \
 EXPOSE 5000
 
 # Set environment variables
-ENV FLASK_APP=main.py
+ENV FLASK_APP=app.py
 ENV FLASK_ENV=production
 ENV PYTHONUNBUFFERED=1
 
