@@ -157,11 +157,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const num = parseFloat(numStr);
             
             if (!isNaN(num)) {
-                // Start from 0
-                let startNum = 0;
                 // Adjust duration and interval based on number size and device
-                const duration = isMobile ? (num > 1000 ? 1000 : 1500) : 1500; // Shorter duration for large numbers on mobile
-                const interval = isMobile ? (num > 1000 ? 10 : 20) : 20; // More frequent updates for large numbers on mobile
+                const duration = isMobile ? 2000 : 1500; // Increased duration for mobile to ensure completion
+                const interval = isMobile ? 15 : 20; // Adjusted interval for smoother animation on mobile
                 const steps = duration / interval;
                 const increment = num / steps;
                 
