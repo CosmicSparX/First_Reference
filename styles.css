@@ -3486,3 +3486,25 @@ nav ul li a.active:after {
     font-size: 0.85rem;
   }
 }
+
+.process-intro .blog-link {
+  color: var(--primary-color);
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.process-intro .blog-link:hover {
+  color: var(--secondary-color);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+@media (max-width: 768px) {
+  .process-intro .blog-link {
+    display: block;
+    margin-top: 15px;
+  }
+}

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Reference Blog - Insights on Hiring, Verification, and Recruitment</title>
+    <meta name="description" content="Explore First Reference's blog for insights on hiring, background verification, and recruitment best practices. Learn about verified candidates, gig economy hiring, and more.">
+    <meta name="keywords" content="hiring blog, recruitment insights, background verification, candidate verification, gig economy hiring, verified candidates, India recruitment">
+    <meta name="author" content="First Reference">
+    <meta property="og:title" content="First Reference Blog - Insights on Hiring, Verification, and Recruitment">
+    <meta property="og:description" content="Explore First Reference's blog for insights on hiring, background verification, and recruitment best practices.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://firstreference.in/blog/">
+    <link rel="canonical" href="https://firstreference.in/blog/">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../assets/logo.ico" type="image/x-icon">
+    <style>
+        .blog-hero {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding-top: 60px;
+            overflow: hidden;
+        }
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                linear-gradient(45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 75%, transparent 75%, transparent);
+            background-size: 100% 100%, 100% 100%, 60px 60px;
+            animation: shine 8s linear infinite;
+        }
+        @keyframes shine {
+            0% {
+                background-position: 0% 0%, 0% 0%, 0 0;
+            }
+            100% {
+                background-position: 0% 0%, 0% 0%, 60px 60px;
+            }
+        }
+        .blog-hero-content {
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+        .blog-hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            line-height: 1.3;
+            font-weight: 700;
+        }
+        .blog-hero-content p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.95);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .blog-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .blog-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .blog-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .blog-card-content {
+            padding: 25px;
+        }
+        .blog-card-meta {
+            display: flex;
+            gap: 20px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        .blog-card-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .blog-card-meta i {
+            color: var(--primary-color);
+        }
+        .blog-card h2 {
+            font-size: 1.4rem;
+            margin: 0 0 15px;
+            color: var(--text-color);
+            line-height: 1.4;
+        }
+        .blog-card p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .blog-categories {
+            max-width: 1200px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .category-tag {
+            background: var(--light-bg);
+            padding: 10px 20px;
+            border-radius: 25px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .category-tag:hover,
+        .category-tag.active {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        @media (max-width: 1024px) {
+            .blog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .blog-hero {
+                height: 250px;
+                padding-top: 50px;
+            }
+            .blog-hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .blog-hero-content p {
+                font-size: 1.1rem;
+            }
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .blog-card-image {
+                height: 180px;
+            }
+        }
+        @media (max-width: 480px) {
+            .blog-hero {
+                height: 200px;
+                padding-top: 40px;
+            }
+            .blog-hero-content h1 {
+                font-size: 1.8rem;
+            }
+            .blog-hero-content p {
+                font-size: 1rem;
+            }
+            .blog-card-content {
+                padding: 20px;
+            }
+            .blog-card h2 {
+                font-size: 1.2rem;
+            }
+            .blog-card-meta {
+                font-size: 0.8rem;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                    <img src="../assets/fr.svg" alt="FR Logo" class="logo-svg">
+                    <h1>First Reference</h1>
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#candidates">Verified Candidates</a></li>
+                    <li><a href="../index.html#candidate-verification">Get Verified</a></li>
+                    <li><a href="../index.html#bgv">Background Verification</a></li>
+                    <li><a href="../index.html#contact" class="nav-btn">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="blog-hero">
+        <div class="blog-hero-content">
+            <h1>First Reference Blog</h1>
+            <p>Insights on hiring, verification, and recruitment best practices</p>
+        </div>
+    </div>
+
+    <main class="blog-content">
+        <div class="blog-grid">
+            <a href="hire-smarter-with-first-reference.html" class="blog-card">
+                <img src="../assets/dylan-gillis-KdeqA3aTnBY-unsplash.jpg" alt="Hire Smarter with First Reference" class="blog-card-image">
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span><i class="far fa-calendar"></i> March 24, 2025</span>
+                        <span><i class="far fa-clock"></i> 5 min read</span>
+                    </div>
+                    <h2>Hire Smarter with First Reference: Verified Candidates Delivered Fast</h2>
+                    <p>Learn how First Reference helps recruiters find genuine, job-ready candidates with our background verification services.</p>
+                </div>
+            </a>
+
+            <a href="background-verification-guide.html" class="blog-card">
+                <img src="../assets/ux-indonesia-qC2n6RQU4Vw-unsplash.jpg" alt="Complete Guide to Background Verification" class="blog-card-image">
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span><i class="far fa-calendar"></i> March 25, 2025</span>
+                        <span><i class="far fa-clock"></i> 8 min read</span>
+                    </div>
+                    <h2>Complete Guide to Background Verification in India</h2>
+                    <p>Learn everything about background verification in India - from employment checks to education verification.</p>
+                </div>
+            </a>
+
+            <a href="candidate-verification-gig-economy.html" class="blog-card">
+                <img src="../assets/image_2025-06-05_164158588.png" alt="Candidate Verification in Gig Economy" class="blog-card-image">
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span><i class="far fa-calendar"></i> March 26, 2025</span>
+                        <span><i class="far fa-clock"></i> 6 min read</span>
+                    </div>
+                    <h2>Why Candidate Verification is Crucial in the Gig Economy</h2>
+                    <p>Discover why candidate verification is essential in the gig economy and how First Reference helps companies verify gig workers.</p>
+                </div>
+            </a>
+
+            <a href="ai-blockchain-bgv.html" class="blog-card">
+                <img src="../assets/ai-blockchain-bgv.jpg" alt="AI & Blockchain in BGV" class="blog-card-image">
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <span><i class="far fa-calendar"></i> March 27, 2025</span>
+                        <span><i class="far fa-clock"></i> 7 min read</span>
+                    </div>
+                    <h2>How First Reference Uses AI & Blockchain to Revolutionize Background Verification</h2>
+                    <p>Discover how First Reference leverages AI agents and blockchain technology to make background verification faster and more accurate.</p>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo-img">
+                    <img src="../assets/fr.svg" alt="First Reference Logo" class="footer-logo-svg">
+                    <h3>First Reference</h3>
+                </div>
+                <div class="footer-contact">
+                    <div class="footer-email">
+                        <a href="mailto:getintouch@firstreference.in"><i class="fas fa-envelope"></i> getintouch@firstreference.in</a>
+                    </div>
+                    <div class="footer-phone">
+                        <a href="tel:+917204827330"><i class="fas fa-phone-alt"></i> +91 72048 27330</a>
+                    </div>
+                </div>
+                <div class="footer-copyright">
+                    &copy; 2025 First Reference. All rights reserved.
+                </div>
+                <div class="footer-links">
+                    <a href="../privacy-policy.html">Privacy Policy</a>
+                    <a href="../terms-conditions.html">Terms & Conditions</a>
+                    <a href="../cancellation-policy.html">Cancellation Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html> 
