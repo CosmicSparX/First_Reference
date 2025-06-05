@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   website:
@@ -17,4 +17,11 @@ services:
       - ./privacy-policy.html:/usr/share/nginx/html/privacy-policy.html
       - ./terms-conditions.html:/usr/share/nginx/html/terms-conditions.html
       - ./cancellation-policy.html:/usr/share/nginx/html/cancellation-policy.html
-      - ./assets:/usr/share/nginx/html/assets 
+      - ./assets:/usr/share/nginx/html/assets
+      # Blog section
+      - ./blog:/usr/share/nginx/html/blog
+      - ./blog/index.html:/usr/share/nginx/html/blog/index.html
+      - ./blog/ai-blockchain-bgv.html:/usr/share/nginx/html/blog/ai-blockchain-bgv.html
+      - ./blog/background-verification-guide.html:/usr/share/nginx/html/blog/background-verification-guide.html
+      - ./blog/candidate-verification-gig-economy.html:/usr/share/nginx/html/blog/candidate-verification-gig-economy.html
+      - ./blog/hire-smarter-with-first-reference.html:/usr/share/nginx/html/blog/hire-smarter-with-first-reference.html
