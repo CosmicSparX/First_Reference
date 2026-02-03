@@ -1,3 +1,31 @@
-# Large Language Models (LLMs) used in this project:
+# First Reference
 
-- Gemini (Google)
+> First Reference is India's trusted background verification and verified candidates service. We provide pre-screened, background-verified candidates to businesses, and offer comprehensive BGV solutions powered by AI and blockchain technology.
+
+First Reference helps thousands of recruiters and HR professionals across India hire smarter and faster. Our mission is to eliminate fake profiles and connect employers with qualified, verified candidates ready to work.
+
+## Products & Services
+
+- [Verified Candidate Packs](#candidates): Get access to 100-200 pre-screened candidates for various roles.
+- [Delivery Boys Pack](#candidates): A specialized pack for hiring delivery executives.
+- [Telecallers Pack](#candidates): Verified candidates suitable for telecalling and customer support roles.
+- [Sales Executives Pack](#candidates): A curated list of candidates for sales positions.
+- [Background Verification (BGV) Services](#bgv): Comprehensive, fast, and secure background checks for businesses.
+- [Candidate Verification](#candidate-verification): A free service for individuals to get their profiles and credentials verified to stand out to employers.
+
+## Blog
+
+- [Blog Home](/blog/)
+- [The Problem First Reference is Solving](/blog/the-problem-first-reference-is-solving/)
+- [Hire Smarter with First Reference](/blog/hire-smarter-with-first-reference/)
+- [A Guide to Background Verification](/blog/background-verification-guide/)
+- [Candidate Verification in the Gig Economy](/blog/candidate-verification-gig-economy/)
+- [AI and Blockchain in Background Verification](/blog/ai-blockchain-bgv/)
+
+## About & Legal
+
+- [About Us](#home)
+- [Contact Us](#contact)
+- [Privacy Policy](/privacy-policy/)
+- [Terms & Conditions](/terms-conditions/)
+- [Cancellation Policy](/cancellation-policy/)
