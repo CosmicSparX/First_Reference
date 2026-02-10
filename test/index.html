@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Language Switcher Test Page</title>
     <style>
         body { font-family: sans-serif; line-height: 1.6; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #333; }
@@ -39,14 +40,28 @@
             <figcaption data-i18n="img_caption">Figure 1: A placeholder image for testing alt tags.</figcaption>
         </figure>
 
+        <figure>
+            <img
+              srcset="Screenshot-2025-10-10-at-23-00-01--400w.avif 400w, Screenshot-2025-10-10-at-23-00-01--600w.avif 600w, Screenshot-2025-10-10-at-23-00-01--800w.avif 800w, Screenshot-2025-10-10-at-23-00-01--1000w.avif 1000w, Screenshot-2025-10-10-at-23-00-01--1200w.avif 1200w, Screenshot-2025-10-10-at-23-00-01--1600w.avif 1600w"
+              sizes="(max-width: 400px) 400px, (max-width: 600px) 600px, (max-width: 800px) 800px, (max-width: 1000px) 1000px, (max-width: 1200px) 1200px, (min-width: 1201px) 1600px"
+              src="Screenshot 2025-10-10 at 23-00-01 .png"
+              alt=""
+              width="1680"
+              height="1008"
+            />
+        </figure>
         <section>
             <h2 data-i18n="section_video">Embedded Content</h2>
             <p data-i18n="p2">Below is an iframe. Some switchers need to reload iframes to change their internal language parameters.</p>
-            
             <iframe 
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                title="YouTube video player"
-                data-i18n-title="video_title">
+                width="560" 
+                height="315" 
+                src="https://www.youtube.com/embed/MFsYaRnrcPQ?origin=https://first-reference.csx.codes"
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
             </iframe>
         </section>
 
