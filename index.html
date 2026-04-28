@@ -50,52 +50,115 @@
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "First Reference",
-        "url": "https://firstreference.in",
-        "logo": "/assets/fr.svg",
-        "description": "India's trusted background verification and candidate verification service provider.",
-        "address": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://firstreference.in/#organization",
+          "name": "First Reference",
+          "url": "https://firstreference.in",
+          "logo": "https://firstreference.in/assets/fr.svg",
+          "image": "https://firstreference.in/assets/og-image.jpg",
+          "description": "India's trusted background verification and candidate verification service provider, specializing in bulk verified candidate data for blue-collar and white-collar roles.",
+          "telephone": "+91-XXXXXXXXXX",
+          "priceRange": "₹399 - ₹599",
+          "address": {
             "@type": "PostalAddress",
-            "addressCountry": "IN",
-            "addressRegion": "India"
-        },
-        "areaServed": {
+            "streetAddress": "Your Office Address, Sector/Area",
+            "addressLocality": "City Name",
+            "addressRegion": "State",
+            "postalCode": "000000",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "XX.XXXX",
+            "longitude": "XX.XXXX"
+          },
+          "areaServed": {
             "@type": "Country",
             "name": "India"
-        },
-        "aggregateRating": {
+          },
+          "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "4.8",
             "reviewCount": "10000"
-        },
-        "offers": [
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+91-XXXXXXXXXX",
+            "contactType": "customer service",
+            "areaServed": "IN",
+            "availableLanguage": ["en", "hi"]
+          },
+          "sameAs": [
+            "https://www.facebook.com/firstreference",
+            "https://www.linkedin.com/company/firstreference",
+            "https://twitter.com/firstreference"
+          ],
+          "makesOffer": [
             {
-                "@type": "Offer",
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
                 "name": "Delivery Boys Pack",
-                "price": "399",
-                "priceCurrency": "INR",
-                "description": "100-200 verified delivery executive candidates across India",
-                "areaServed": "IN"
+                "description": "100-200 verified delivery executive candidates across India"
+              },
+              "price": "399",
+              "priceCurrency": "INR"
             },
             {
-                "@type": "Offer",
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
                 "name": "Telecallers Pack",
-                "price": "499",
-                "priceCurrency": "INR",
-                "description": "100-200 verified telecaller candidates across India",
-                "areaServed": "IN"
+                "description": "100-200 verified telecaller candidates across India"
+              },
+              "price": "499",
+              "priceCurrency": "INR"
             },
             {
-                "@type": "Offer",
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
                 "name": "Sales Executives Pack",
-                "price": "599",
-                "priceCurrency": "INR",
-                "description": "100-200 verified sales executive candidates across India",
-                "areaServed": "IN"
+                "description": "100-200 verified sales executive candidates across India"
+              },
+              "price": "599",
+              "priceCurrency": "INR"
             }
-        ]
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How does First Reference verify candidates?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "First Reference uses a multi-layered verification process including Aadhaar validation, previous employment checks, and criminal record screening to ensure 100% data reliability."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the turnaround time for candidate lists?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Once a pack is purchased, the verified candidate data is usually available for immediate download or delivered within 24 hours depending on the specific requirements."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do you provide hiring support across all of India?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, our database covers major Tier 1, Tier 2, and Tier 3 cities across all states in India."
+              }
+            }
+          ]
+        }
+      ]
     }
     </script>
 </head>
